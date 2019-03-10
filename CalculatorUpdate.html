@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculator</title>
+<style>
+   input[type="text"]
+{
+    height:40px;
+    width:210px;
+}
+   input[type="button"]
+{
+    height:25px;
+    width:25px;
+    margin:5px;
+    padding:20px;
+    text-align: center;
+}
+</style>
+<script>
+    var answer = new Number();
+    var temp = new Number();
+    var store  = new Array();
+    var i =0;
+ function get(object){
+    if(object.id=="operator"){
+    store[i++] = answer;
+    answer = new Number();
+    store[i++] = object.value;
+    }
+    if(object.id=="operand"){
+    answer += object.value;
+    }
+ 
+    document.getElementById("box").value = document.getElementById("box").value +       object.value;
+ }
+
+ function display(){
+
+    for(j=0; j<=store.length;j++){
+ 
+  if (j==1) {
+        if(store[j] == "+") temp = Number(store[j-1]) + Number(store[j+1]) ;
+         if(store[j] == "/") temp = Number(store[j-1]) / Number(store[j+1]) ;
+          if(store[j] == "*") temp = Number(store[j-1]) * Number(store[j+1]) ;
+           if(store[j] == "-") temp = Number(store[j-1]) - Number(store[j+1]) ;
+           }
+           else{
+            if(store[j] == "+") temp = temp + Number(store[j+1]) ;
+         if(store[j] == "/") temp = temp / Number(store[j+1]) ;
+          if(store[j] == "*") temp = temp * Number(store[j+1]) ;
+           if(store[j] == "-") temp = temp - Number(store[j+1]) ;
+           
+           }
+    }
+        document.getElementById("box").value = temp;
+ }
+ 
+</script>
+</head>
+<body>
+<center>
+    <form>
+    <input type="text" name="box" id="box"  required>
+    <br><br>
+    <input type="button" value="1" id="operand" onclick="get(this);">
+    <input type="button" value="2" id="operand" onclick="get(this);">
+    <input type="button" value="3" id="operand" onclick="get(this);">
+    <input type="button" value="+" id="operator" onclick="get(this);">
+    <br>
+    <input type="button" value="4" id="operand" onclick="get(this);">
+    <input type="button" value="5" id="operand" onclick="get(this);">
+    <input type="button" value="6" id="operand" onclick="get(this);">
+    <input type="button" value="-" id="operator" onclick="get(this);">
+    <br>
+    <input type="button" value="7" id="operand" onclick="get(this);">
+    <input type="button" value="8" id="operand" onclick="get(this);">
+    <input type="button" value="9" id="operand" onclick="get(this);">
+    <input type="button" value="*" id="operator" onclick="get(this);">
+    <br>
+    <input type="button" value="0" id="operand" onclick="get(this);">
+    <input type="button" value="C" onclick="window.location.href = 'calculatorUpdate.html'">
+    <input type="button" value="=" id="operator" onclick="get(this); display();">
+    <input type="button" value="/" id="operator" onclick="get(this);">
+    </form>
+</center>
+</body>
+</html>
